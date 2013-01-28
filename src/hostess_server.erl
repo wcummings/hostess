@@ -40,9 +40,6 @@ handle_call({new_table, Name}, _From, State) ->
     Reply = add_table({new, Name}),
     {reply, Reply, State};
 
-handle_call(pid, _From, State) ->
-    {reply, {ok, self()}, State};
-
 handle_call(_Msg, _From, State) ->
     {reply, {error, undef}, State}.
 

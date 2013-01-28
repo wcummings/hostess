@@ -1,5 +1,5 @@
 -module(hostess).
--export([new/1, transaction/2, delete/1]).
+-export([new/1, trans/2, delete/1]).
 
 new(Name) ->
     hostess_server:new_table(Name).

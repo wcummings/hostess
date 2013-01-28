@@ -81,4 +81,4 @@ add_table(Name) ->
     {ok, Pid} = hostess_sup:add_worker(Name),
     link(Pid),
     ets:give_away(Name, Pid, undefined),
-    {ok, Name}.
+    Name.

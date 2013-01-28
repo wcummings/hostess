@@ -6,3 +6,6 @@ new(Name) ->
 
 trans(Name, Func) ->
     gen_server:call(Name, {transaction, Func}).
+
+delete(Name) ->
+    gen_server:call(Name, stop).

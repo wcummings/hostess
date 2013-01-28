@@ -49,7 +49,7 @@ handle_info({'ETS-TRANSFER', Name, OldOwner, _Data}, State) ->
 
 handle_info({'EXIT', FromPid, _Reason}, State) ->
     [{FromPid, Name}] = ets:lookup(pending_tables, FromPid),
-    ets:delete(FromPid),
+    ets:delete(Name, FromPid),
     add_table(Name),
     {noreply, State};
 

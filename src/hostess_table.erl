@@ -39,7 +39,7 @@ handle_cast(_Msg, State) ->
     {noreply, State}.
 
 handle_call({transaction, Func}, _From, #table_state{name = Name} = S) ->
-    RV = Func(Name),
+    RV = (catch Func(Name)),
     {reply, {ok, RV}, S};
 
 handle_call(_Msg, _From, State) ->

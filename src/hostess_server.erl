@@ -36,9 +36,11 @@ handle_cast(stop, State) ->
 handle_cast(_Msg, State) ->
     {noreply, State}.
 
-handle_call({new_table, Name}, _From, State) ->
-    Reply = add_table({new, Name}),
-    {reply, Reply, State};
+handle_call({new_table, Name}, _From, S) ->
+    case add_table({new, Name}) of
+        {error, _Reason} = E -> {reply, {ok, E}, S};
+        Name -> {reply, {ok, Name}, S}
+    end;
 
 handle_call(_Msg, _From, State) ->
     {reply, {error, undef}, State}.

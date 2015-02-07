@@ -46,11 +46,11 @@ handle_call(_Msg, _From, State) ->
     {reply, {error, undef}, State}.
 
 handle_info({'ETS-TRANSFER', Name, OldOwner, _Data}, #state{pending_tables = PendingTables} = S) ->
-    {noreply, S#state{pending_tables = dict:append(OldOwner, Name, PendingTables)}};
+    {noreply, S#state{pending_tables = dict:store(OldOwner, Name, PendingTables)}};
 
 handle_info({'EXIT', FromPid, _Reason}, #state{pending_tables = PendingTables} = S) ->
     Name = dict:fetch(FromPid, PendingTables),
-    {ok, Name} = add_table(Name),
+    Name = add_table(Name),
     {noreply, S#state{pending_tables = dict:erase(FromPid, PendingTables)}};
 
 handle_info(_Msg, State) ->
@@ -79,4 +79,4 @@ add_table(Name) ->
     {ok, Pid} = hostess_sup:add_worker(Name),
     link(Pid),
     ets:give_away(Name, Pid, undefined),
-    {ok, Name}.
+    Name.

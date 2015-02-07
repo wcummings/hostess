@@ -32,8 +32,9 @@ child_spec(Name) ->
 init([Name]) ->
     {ok, #table_state{name = Name}}.
 
-handle_cast(stop, State) ->
-    {stop, normal, State};
+handle_cast(stop, #table_state{name = Name} = S) ->
+    ets:delete(Name),
+    {stop, normal, S};
 
 handle_cast(_Msg, State) ->
     {noreply, State}.

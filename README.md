@@ -20,7 +20,7 @@ hostess:new(my_table).
 
 All hostess tables are public, so you can access the table directly with ets.
 
-If you'd like to access the table through its parent process, use the trans/1
+If you'd like to access the table through its parent process, use the `transaction/1`
 operation:
 
 ```erlang

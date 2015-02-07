@@ -28,7 +28,6 @@ new_table(Name) ->
 %% ===================================================================
 
 init([]) ->
-    process_flag(trap_exit, true),
     {ok, #state{pending_tables = dict:new()}}.
 
 handle_cast(stop, State) ->

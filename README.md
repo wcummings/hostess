@@ -14,21 +14,21 @@ for each table. These processes are registered with the same name as the table.
 
 To create a new hostess table:
 
-<pre>
+```erlang
 hostess:new(my_table).
-</pre>
+```
 
 All hostess tables are public, so you can access the table directly with ets.
 
 If you'd like to access the table through its parent process, use the trans/1
 operation:
 
-<pre>
+```erlang
 hostess:transaction(my_table, fun (Tbl) -> ets:insert(Tbl, {test, 1}) end).
-</pre>
+```
 
 To delete a table:
 
-<pre>
+```erlang
 hostess:delete(my_table).
-</pre>
+```

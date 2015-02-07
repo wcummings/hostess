@@ -24,7 +24,7 @@ If you'd like to access the table through its parent process, use the trans/1
 operation:
 
 <pre>
-hostess:trans(my_table, fun (Tbl) -> ets:insert(Tbl, {test, 1}) end).
+hostess:transaction(my_table, fun (Tbl) -> ets:insert(Tbl, {test, 1}) end).
 </pre>
 
 To delete a table:
